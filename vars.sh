@@ -1,10 +1,12 @@
 #!/bin/sh
 ls
 GIT_HASH=
-args=$1;shift
 GIT_HASH=$1;
 echo $GIT_HASH
 
+BRANCH=$3
+
+echo "The branch is $BRANCH";
 
 ### TEST @2
 
