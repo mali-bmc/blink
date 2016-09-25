@@ -2,9 +2,11 @@
 ls
 GIT_HASH=
 GIT_HASH=$1;
-echo $GIT_HASH
+echo "The PR SHA is $GIT_HASH"
 
-BRANCH=$3
+
+
+BRANCH=$2
 
 echo "The branch is $BRANCH";
 
