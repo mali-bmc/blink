@@ -1,10 +1,14 @@
 #!/bin/sh
 ls
 GIT_HASH=
-args=$1;shift
 GIT_HASH=$1;
-echo $GIT_HASH
+echo "The PR SHA is $GIT_HASH"
 
+
+
+BRANCH=$2
+
+echo "The branch is $BRANCH";
 
 ### TEST @2
 
