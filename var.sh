@@ -1,4 +1,5 @@
 ##Change Creds
+##Fix
 GIT-USER="mali-bmc"
 PWD="Gridapp123"
 BRANCH=
