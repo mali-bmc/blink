@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 ##Change Creds
 ##Fix
-GIT-USER="mali-bmc"
+USER="mali-bmc"
 PWD="Gridapp123"
 BRANCH=
 TC_HOST=
@@ -62,7 +62,7 @@ else
 	PULL_REQ_ID=$(echo ${BRANCH} | cut -f3 -d/)
 
 	# Query github for PR details to determine the repo the PR originated from
-	BASE_FORK=$(curl -s -u ${GIT-USER}:${PWD} https://api.github.com/repos/Conductor/conductor/pulls/${PULL_REQ_ID} | jq --raw-output .head.repo.full_name | cut -f1 -d/)
+	BASE_FORK=$(curl -s -u ${USER}:${PWD} https://api.github.com/repos/Conductor/conductor/pulls/${PULL_REQ_ID} | jq --raw-output .head.repo.full_name | cut -f1 -d/)
 fi
 
 
@@ -87,11 +87,11 @@ done
 
 ## Don't kickoff a Teamcity build if a succesful one has already ran against the PR.
 
-PR_SHA=$(curl -s -u ${GITHUB_TOKEN}:x-oauth-basic https://api.github.com/repos/Conductor/conductor/pulls/${PULL_REQ_ID} | jq --raw-output .head.sha)
+PR_SHA=$(curl -s -u ${USER}:${PWD} https://api.github.com/repos/Conductor/conductor/pulls/${PULL_REQ_ID} | jq --raw-output .head.sha)
 
-PR_STATUS=$(curl -s -u ${GIT-USER}:${PWD} https://api.github.com/repos/Conductor/conductor/statuses/${PR_SHA} | jq --raw-output  '.[0].state')
+PR_STATUS=$(curl -s -u ${USER}:${PWD} https://api.github.com/repos/Conductor/conductor/statuses/${PR_SHA} | jq --raw-output  '.[0].state')
 if [[ ${PR_STATUS} == "success" ]]; then
-	  TC_SUCCESSFUL_BUILD=$(curl -s -u ${GIT-USER}:${PWD} https://api.github.com/repos/Conductor/conductor/statuses/${PR_SHA} | jq --raw-output  '.[0].description')
+	  TC_SUCCESSFUL_BUILD=$(curl -s -u ${USER}:${PWD} https://api.github.com/repos/Conductor/conductor/statuses/${PR_SHA} | jq --raw-output  '.[0].description')
 	  echo "Teamcity has already reported the success status for the following build: ${TC_SUCCESSFUL_BUILD}"
 
 #TC_SUCCESS_BUILD=$(curl -s -u ${GITHUB_TOKEN}:x-oauth-basic https://api.github.com/repos/Conductor/conductor/statuses/$i | jq --raw-output '.[] | select(.state=="success") | .description')
