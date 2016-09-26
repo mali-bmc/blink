@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/sh
 ##Change Creds
 ##Fix
 USER="mali-bmc"
