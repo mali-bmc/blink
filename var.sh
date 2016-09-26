@@ -1,3 +1,4 @@
+##Change Creds
 GIT-USER=mali-bmc
 PWD=Gridapp123
 BRANCH=
