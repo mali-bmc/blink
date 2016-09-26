@@ -17,7 +17,12 @@ if [[ ${PR_STATUS} == "success" ]]; then
 
 	exit 0
 else 
-echo "this is the else part"
+echo "this is the else part";
+
+echo ${PR_SHA}
+curl -s -u mali-bmc:Gridapp123  https://api.github.com/repos/Conductor/conductor/statuses/${PR_SHA};
+
+curl -s -u mali-bmc:Gridapp123 https://api.github.com/repos/Conductor/conductor/statuses/${PR_SHA
 
 fi
   
