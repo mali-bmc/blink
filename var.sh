@@ -1,4 +1,5 @@
-GITHUB_TOKEN=
+GIT-USER=mali-bmc
+PWD=Gridapp123
 BRANCH=
 TC_HOST=
 TC_USER=
@@ -85,9 +86,9 @@ done
 
 PR_SHA=$(curl -s -u ${GITHUB_TOKEN}:x-oauth-basic https://api.github.com/repos/Conductor/conductor/pulls/${PULL_REQ_ID} | jq --raw-output .head.sha)
 
-PR_STATUS=$(curl -s -u ${GITHUB_TOKEN}:x-oauth-basic https://api.github.com/repos/Conductor/conductor/statuses/${PR_SHA} | jq --raw-output  '.[0].state')
+PR_STATUS=$(curl -s -u ${GIT-USER}:${PWD} https://api.github.com/repos/Conductor/conductor/statuses/${PR_SHA} | jq --raw-output  '.[0].state')
 if [[ ${PR_STATUS} == "success" ]]; then
-	  TC_SUCCESSFUL_BUILD=$(curl -s -u ${GITHUB_TOKEN}:x-oauth-basic https://api.github.com/repos/Conductor/conductor/statuses/${PR_SHA} | jq --raw-output  '.[0].description')
+	  TC_SUCCESSFUL_BUILD=$(curl -s -u ${GIT-USER}:${PWD} https://api.github.com/repos/Conductor/conductor/statuses/${PR_SHA} | jq --raw-output  '.[0].description')
 	  echo "Teamcity has already reported the success status for the following build: ${TC_SUCCESSFUL_BUILD}"
 
 #TC_SUCCESS_BUILD=$(curl -s -u ${GITHUB_TOKEN}:x-oauth-basic https://api.github.com/repos/Conductor/conductor/statuses/$i | jq --raw-output '.[] | select(.state=="success") | .description')
