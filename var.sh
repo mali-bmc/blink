@@ -7,7 +7,7 @@ MATCHES=()
 TC_BUILD_NOT=
 PR_SHA==
 
-##Test
+##Test t etst test
 function usage() {
   echo $1
   echo "Usage:"
