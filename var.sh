@@ -8,7 +8,7 @@ PULL_REQ_ID=$1
 
 PR_SHA=$(curl -s -u mali-bmc:Gridapp123 https://api.github.com/repos/Conductor/conductor/pulls/${PULL_REQ_ID})
 
-PR_STATUS=$(curl -s -u mali-bmc:Gridapp123  https://api.github.com/repos/Conductor/conductor/statuses/${PR_SHA})
+PR_STATUS=$(curl -s -u mali-bmc:Gridapp123  https://api.github.com/repos/Conductor/conductor/statuses/${PR_SHA}|grep success)
 if [[ ${PR_STATUS} == "success" ]]; then
 	  TC_SUCCESSFUL_BUILD=$(curl -s -u mali-bmc:Gridapp123 https://api.github.com/repos/Conductor/conductor/statuses/${PR_SHA})
 	  echo "Teamcity has already reported the success status for the following build: ${TC_SUCCESSFUL_BUILD}"
