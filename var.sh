@@ -61,7 +61,7 @@ else
 	PULL_REQ_ID=$(echo ${BRANCH} | cut -f3 -d/)
 
 	# Query github for PR details to determine the repo the PR originated from
-	BASE_FORK=$(curl -s -u ${GITHUB_TOKEN}:x-oauth-basic https://api.github.com/repos/Conductor/conductor/pulls/${PULL_REQ_ID} | jq --raw-output .head.repo.full_name | cut -f1 -d/)
+	BASE_FORK=$(curl -s -u ${GIT-USER}:${PWD} https://api.github.com/repos/Conductor/conductor/pulls/${PULL_REQ_ID} | jq --raw-output .head.repo.full_name | cut -f1 -d/)
 fi
 
 
