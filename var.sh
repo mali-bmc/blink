@@ -1,6 +1,6 @@
 ##Change Creds
-GIT-USER=mali-bmc
-PWD=Gridapp123
+GIT-USER="mali-bmc"
+PWD="Gridapp123"
 BRANCH=
 TC_HOST=
 TC_USER=
