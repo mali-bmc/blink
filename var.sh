@@ -1,3 +1,4 @@
+#!/usr/bin/bash
 ##Change Creds
 ##Fix
 GIT-USER="mali-bmc"
