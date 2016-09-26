@@ -22,7 +22,7 @@ function usage() {
   exit 1
 }
 
-
+##test
 ## Capture arguments
 while [[ $1 ]]; do
 	arg=$1; shift
