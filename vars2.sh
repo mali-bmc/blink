@@ -96,19 +96,19 @@ if [[ ${PR_STATUS} == "success" ]]; then
 fi
   
 ## If there are already builds running for this PR they should be cancelled. 
-RUNNING_BUILD_NAMES=($(curl -s "http://${TC_USER}:${TC_PASS}@${TC_HOST}:8111/httpAuth/app/rest/builds?locator=branch:${PULL_REQ_ID},running:true" -H "Accept: application/json" | jq --raw-output .build[].buildTypeId))
-NUMBER_OF_RUNNING_BUILDS=${#RUNNING_BUILD_NAMES[*]}
-if [[ $NUMBER_OF_RUNNING_BUILDS -gt 1 ]]; then 
-	NUM_BUILDS_TO_CANCEL=$((${NUMBER_OF_RUNNING_BUILDS}-1))
-	echo "Canceling ${NUM_BUILDS_TO_CANCEL} builds that are already running for the PR"
-	for i in `seq 1 $NUMBER_OF_RUNNING_BUILDS`
-	do 
-		BUILD_TYPE=${RUNNING_BUILD_NAMES[i-1]}
-		if [[ "${BUILD_TYPE}" != "PreMergeWorkflows_Router" ]]; then								  
-			curl -s -X POST "http://${TC_USER}:${TC_PASS}@${TC_HOST}:8111/httpAuth/app/rest/builds/branch:${PULL_REQ_ID},running:true,buildType:id:${BUILD_TYPE}" -d "<buildCancelRequest comment='This build was cancelled because a new commit was pushed to the branch. Another Complete Workflow that includes the new commit will be triggered.' readdIntoQueue='false' />" -H "Content-Type: application/xml"
-		fi
-	done
-fi
+#RUNNING_BUILD_NAMES=($(curl -s "http://${TC_USER}:${TC_PASS}@${TC_HOST}:8111/httpAuth/app/rest/builds?locator=branch:${PULL_REQ_ID},running:true" -H "Accept: application/json" | jq --raw-output .build[].buildTypeId))
+#NUMBER_OF_RUNNING_BUILDS=${#RUNNING_BUILD_NAMES[*]}
+#if [[ $NUMBER_OF_RUNNING_BUILDS -gt 1 ]]; then 
+#	NUM_BUILDS_TO_CANCEL=$((${NUMBER_OF_RUNNING_BUILDS}-1))
+#	echo "Canceling ${NUM_BUILDS_TO_CANCEL} builds that are already running for the PR"
+#	for i in `seq 1 $NUMBER_OF_RUNNING_BUILDS`
+#	do 
+#		BUILD_TYPE=${RUNNING_BUILD_NAMES[i-1]}
+#		if [[ "${BUILD_TYPE}" != "PreMergeWorkflows_Router" ]]; then								  
+#			curl -s -X POST "http://${TC_USER}:${TC_PASS}@${TC_HOST}:8111/httpAuth/app/rest/builds/branch:${PULL_REQ_ID},running:true,buildType:id:${BUILD_TYPE}" -d "<buildCancelRequest comment='This build was cancelled because a new commit was pushed to the branch. Another Complete Workflow that includes the new commit will be triggered.' readdIntoQueue='false' />" -H "Content-Type: application/xml"
+#		fi
+#	done
+#fi
 
 ## Trigger build for the PR
 echo "Triggering TeamCity job: ${TC_BUILD}"
