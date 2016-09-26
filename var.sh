@@ -1,4 +1,6 @@
 #!/bin/sh
+echo "first line"
+exit 0;
 ##Change Creds
 ##Fix
 USER="mali-bmc"
